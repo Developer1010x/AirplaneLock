@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Airplane Lock – Parental Control</string>
+    <string name="accessibility_description">Monitors the power-off dialog to block unauthorized device shutdown.</string>
+</resources>

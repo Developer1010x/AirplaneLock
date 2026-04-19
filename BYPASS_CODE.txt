@@ -1,0 +1,22 @@
+============================================================
+  Airplane Lock – Parental Control
+  BYPASS / TRAVEL MODE CODE
+============================================================
+
+  Bypass Code : TRAVEL2024
+
+  How to use:
+  1. When on an actual plane (or any time you want to
+     temporarily allow airplane mode / power off):
+     → On the lock screen, tap "Use Travel / Bypass Code"
+     → Enter:  TRAVEL2024
+     → All restrictions will be disabled until you
+       turn bypass mode back OFF in the app.
+
+  2. To turn bypass mode OFF again:
+     → Open the app → Travel / Bypass Mode section
+     → Tap "Turn Bypass Mode OFF"
+     → Enter your main parental password to confirm.
+
+  KEEP THIS FILE SAFE — do not share it with your child.
+============================================================

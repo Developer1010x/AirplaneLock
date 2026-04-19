@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device-admin>
+    <uses-policies>
+        <!-- Needed to prevent easy uninstall of the parental control app -->
+    </uses-policies>
+</device-admin>

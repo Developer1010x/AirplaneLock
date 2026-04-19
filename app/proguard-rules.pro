@@ -1,0 +1,2 @@
+-keep class com.parentalcontrol.airplanelock.** { *; }
+-keep class androidx.appcompat.** { *; }
