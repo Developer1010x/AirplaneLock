@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             if (prefs.getBoolean("bypass_active", false)) {
                 showPasswordConfirmDialog(() -> {
                     prefs.edit().putBoolean("bypass_active", false).apply();
+                    AccessLog.record(this, AccessLog.EVENT_BYPASS_OFF);
                     Toast.makeText(this, "Bypass mode OFF. Restrictions active.", Toast.LENGTH_SHORT).show();
                     refreshStatus();
                 });
@@ -173,6 +174,11 @@ public class MainActivity extends AppCompatActivity {
                 showBypassCodeDialog();
             }
         });
+
+        Button viewLogBtn = findViewById(R.id.viewLogBtn);
+        if (viewLogBtn != null) {
+            viewLogBtn.setOnClickListener(v -> showActivityLogDialog());
+        }
 
         activateAdminBtn.setOnClickListener(v -> {
             if (!dpm.isAdminActive(adminComponent)) {
@@ -228,6 +234,41 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    /**
+     * Shows the tamper / activity log so a parent can review every blocked
+     * airplane-mode, mobile-data and power-off attempt, plus failed unlocks and
+     * bypass activations. Offers a one-tap option to clear the history.
+     */
+    private void showActivityLogDialog() {
+        java.util.List<String> entries = AccessLog.getFormattedEntries(this);
+        CharSequence body;
+        if (entries.isEmpty()) {
+            body = "No activity recorded yet.\n\nBlocked airplane-mode, mobile-data and "
+                    + "power-off attempts will appear here.";
+        } else {
+            body = TextUtils.join("\n\n", entries);
+        }
+
+        TextView view = new TextView(this);
+        int pad = (int) (16 * getResources().getDisplayMetrics().density);
+        view.setPadding(pad, pad, pad, pad);
+        view.setTextSize(13);
+        view.setText(body);
+
+        android.widget.ScrollView scroll = new android.widget.ScrollView(this);
+        scroll.addView(view);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Activity Log (" + entries.size() + ")")
+                .setView(scroll)
+                .setPositiveButton("Close", null)
+                .setNegativeButton("Clear Log", (d, w) -> {
+                    AccessLog.clear(this);
+                    Toast.makeText(this, "Activity log cleared", Toast.LENGTH_SHORT).show();
+                })
                 .show();
     }
 

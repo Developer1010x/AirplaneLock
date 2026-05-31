@@ -114,10 +114,12 @@ public class PasswordActivity extends AppCompatActivity {
                 return;
             }
             if (MainActivity.hash(entered).equals(storedHash)) {
+                AccessLog.record(this, AccessLog.EVENT_UNLOCK_SUCCESS);
                 finish();
             } else {
                 failedAttempts++;
                 passwordInput.setText("");
+                AccessLog.record(this, AccessLog.EVENT_UNLOCK_FAILED);
                 if (failedAttempts >= MAX_ATTEMPTS) {
                     lockOutUser();
                 } else {
@@ -148,6 +150,7 @@ public class PasswordActivity extends AppCompatActivity {
                     String entered = input.getText().toString();
                     if (MainActivity.hash(entered).equals(bypassHash)) {
                         prefs.edit().putBoolean("bypass_active", true).apply();
+                        AccessLog.record(this, AccessLog.EVENT_BYPASS_ON);
                         Toast.makeText(this,
                                 "Bypass mode ON. Restrictions disabled until turned off in app.",
                                 Toast.LENGTH_LONG).show();
@@ -195,6 +198,7 @@ public class PasswordActivity extends AppCompatActivity {
 
     private void lockOutUser() {
         isLockedOut = true;
+        AccessLog.record(this, AccessLog.EVENT_LOCKOUT);
         unlockBtn.setEnabled(false);
         passwordInput.setEnabled(false);
         // Store reference so we can cancel if activity is destroyed early

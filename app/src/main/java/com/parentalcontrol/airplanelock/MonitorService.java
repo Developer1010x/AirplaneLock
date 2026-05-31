@@ -139,6 +139,12 @@ public class MonitorService extends Service {
 
     private void launchPasswordScreen(String type) {
         if (PasswordActivity.isShowing) return; // don't stack duplicate screens
+        // Record the attempt so the parent can review it later in the Activity Log
+        if (PasswordActivity.TYPE_MOBILE_DATA.equals(type)) {
+            AccessLog.record(this, AccessLog.EVENT_MOBILE_DATA_BLOCKED);
+        } else {
+            AccessLog.record(this, AccessLog.EVENT_AIRPLANE_BLOCKED);
+        }
         Intent intent = new Intent(this, PasswordActivity.class);
         intent.putExtra(PasswordActivity.EXTRA_TYPE, type);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);

@@ -252,6 +252,41 @@
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
+        <!-- Activity Log Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity Log"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1565C0"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Review every blocked airplane-mode, mobile-data and power-off attempt, along with failed unlocks and bypass activations."
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/viewLogBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Activity Log"
+                android:backgroundTint="#5E35B1"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
         <!-- Instructions -->
         <LinearLayout
             android:layout_width="match_parent"

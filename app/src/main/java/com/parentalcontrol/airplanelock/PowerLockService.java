@@ -84,6 +84,8 @@ public class PowerLockService extends AccessibilityService {
         if (prefs.getBoolean("bypass_active", false)) return;
         if (TextUtils.isEmpty(prefs.getString("hashed_password", ""))) return;
 
+        AccessLog.record(this, AccessLog.EVENT_POWER_BLOCKED);
+
         Intent intent = new Intent(this, PasswordActivity.class);
         intent.putExtra(PasswordActivity.EXTRA_TYPE, PasswordActivity.TYPE_POWER);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
